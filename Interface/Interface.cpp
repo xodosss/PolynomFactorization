@@ -1,4 +1,4 @@
-#include "GUI.h"
+ï»¿#include "GUI.h"
 
 int menuChoise(char **menu, int pointCount)
 {
@@ -10,7 +10,7 @@ int menuChoise(char **menu, int pointCount)
 		else
 			cout << endl << i + 1 << ". " << menu[i];
 
-	cout << endl << endl << "Âûáåðèòå ïóíêò: ";
+	cout << endl << endl << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿ÑƒÐ½ÐºÑ‚: ";
 	fflush(stdin);
 	cin >> menuPoint;
 	return menuPoint;
@@ -34,5 +34,5 @@ void outputFactorization(vector <pair <Polynom, long long>> multipliers)
 void title()
 {
 	system("cls");
-	cout << "Ðàçëîæåíèå ïîëèíîìîâ ñ öåëûìè êîýôôèöèåíòàìè\n";
+	cout << "Ð Ð°Ð·Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ð¾Ð»Ð¸Ð½Ð¾Ð¼Ð¾Ð² Ñ Ñ†ÐµÐ»Ñ‹Ð¼Ð¸ ÐºÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚Ð°Ð¼Ð¸\n";
 }

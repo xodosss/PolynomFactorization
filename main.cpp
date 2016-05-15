@@ -1,4 +1,4 @@
-#include "PolynomZ.h"
+п»ї#include "PolynomZ.h"
 #include "Functions.h"
 #include "GUI.h"
 using namespace func;
@@ -9,11 +9,11 @@ int main()
 	setlocale(LC_CTYPE, "rus");
 
 	char *m_main[] = {
-		"Ввод многочлена",
-		"Разложение на линейные множетели",
-		"Разложение на неприводимые множетели",
-		"Разложение на свободные от квадратов множетели",
-		"Выход" };
+		"Р’РІРѕРґ РјРЅРѕРіРѕС‡Р»РµРЅР°",
+		"Р Р°Р·Р»РѕР¶РµРЅРёРµ РЅР° Р»РёРЅРµР№РЅС‹Рµ РјРЅРѕР¶РµС‚РµР»Рё",
+		"Р Р°Р·Р»РѕР¶РµРЅРёРµ РЅР° РЅРµРїСЂРёРІРѕРґРёРјС‹Рµ РјРЅРѕР¶РµС‚РµР»Рё",
+		"Р Р°Р·Р»РѕР¶РµРЅРёРµ РЅР° СЃРІРѕР±РѕРґРЅС‹Рµ РѕС‚ РєРІР°РґСЂР°С‚РѕРІ РјРЅРѕР¶РµС‚РµР»Рё",
+		"Р’С‹С…РѕРґ" };
 	int menu;
 	Polynom pol;
 	PolynomZ polZ;
@@ -24,14 +24,14 @@ int main()
 		menu = menuChoise(m_main, 5);
 		switch (menu)
 		{
-		case 1: //Ввод
+		case 1: //Р’РІРѕРґ
 			title();
 			cin.ignore();
 			cin.getline(str, 79, '\n');
 			pol = Polynom(str);
 			if (!pol.isIntegerCoefs())
 			{
-				cout << endl << "Неверный ввод" << endl;
+				cout << endl << "РќРµРІРµСЂРЅС‹Р№ РІРІРѕРґ" << endl;
 				system("pause");
 			}
 			else
@@ -49,7 +49,7 @@ int main()
 				cout << endl;
 			}
 			else
-				cout << endl << "Полином не был введен" << endl;
+				cout << endl << "РџРѕР»РёРЅРѕРј РЅРµ Р±С‹Р» РІРІРµРґРµРЅ" << endl;
 			system("pause");
 			break;
 		case 3:
@@ -61,7 +61,7 @@ int main()
 				cout << endl;
 			}
 			else
-				cout << endl << "Полином не был введен" << endl;
+				cout << endl << "РџРѕР»РёРЅРѕРј РЅРµ Р±С‹Р» РІРІРµРґРµРЅ" << endl;
 			system("pause");
 			break;
 		case 4:
@@ -73,14 +73,14 @@ int main()
 				cout << endl;
 			}
 			else
-				cout << endl << "Полином не был введен" << endl;
+				cout << endl << "РџРѕР»РёРЅРѕРј РЅРµ Р±С‹Р» РІРІРµРґРµРЅ" << endl;
 			system("pause");
 			break;
 		case 0:
 			break;
 		default:
 			title();
-			cout << endl << "Был выбран несуществующий пункт меню" << endl;
+			cout << endl << "Р‘С‹Р» РІС‹Р±СЂР°РЅ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ РїСѓРЅРєС‚ РјРµРЅСЋ" << endl;
 			system("pause");
 		}
 	} while (menu);
