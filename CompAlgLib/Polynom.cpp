@@ -20,13 +20,18 @@ Polynom::Polynom(const string str)
 		while (!isdigit(str[i]))
 			i++;
 
-		int num = 0, j = 0;
+		int num = 0, j = 0, sign;
+		if (str[i - 1] == '-')
+			sign = 1;
+		else
+			sign = -1;
 		while (isdigit(str[i]))
 		{
 			num *= pow(10, j);
 			num += (str[i] - '0');
 			i++; j++;
-		}		
+		}
+		num *= sign;
 
 		while (!isdigit(str[i]))
 			i++;
