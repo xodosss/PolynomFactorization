@@ -4,7 +4,7 @@ int menuChoise(char **menu, int pointCount)
 {
 	int menuPoint;
 	system("cls");
-	cout << "Разложение полиномов с целыми коэффициентами\n";
+	cout << "Polynom with integer coefs factorization\n";
 	for (int i = 0; i < pointCount; i++)
 		if (i == pointCount - 1)
 			cout << endl << "0. " << menu[i];
