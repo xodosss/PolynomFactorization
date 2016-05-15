@@ -3,15 +3,14 @@
 int menuChoise(char **menu, int pointCount)
 {
 	int menuPoint;
-	system("cls");
-	cout << "Polynom with integer coefs factorization\n";
+	title();
 	for (int i = 0; i < pointCount; i++)
 		if (i == pointCount - 1)
 			cout << endl << "0. " << menu[i];
 		else
 			cout << endl << i + 1 << ". " << menu[i];
 
-	cout << endl << endl << "Choose point: ";
+	cout << endl << endl << "Выберите пункт: ";
 	fflush(stdin);
 	cin >> menuPoint;
 	return menuPoint;
@@ -30,4 +29,10 @@ void outputFactorization(vector <pair <Polynom, long long>> multipliers)
 		if (i != multipliers.size() - 1)
 			cout << " * ";
 	}
+}
+
+void title()
+{
+	system("cls");
+	cout << "Разложение полиномов с целыми коэффициентами\n";
 }

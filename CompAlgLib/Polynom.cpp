@@ -12,159 +12,41 @@ Polynom::Polynom(const Polynom &ob)
 	coefficients = deque<MegaRational>(ob.coefficients);
 }
 
-//Polynom::Polynom(const string str)
-//{
-//	int tmp, tmp1, tmp2;
-//
-//	coefficients.clear();
-//	if (str.length() < 8)
-//		throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//	for (auto i = 0; i < str.length(); i++)
-//		if (!isdigit(str[i]) && str[i] != 'x' && str[i] != '^' && str[i] != '+' && str[i] != '-' && str[i] != '/' && str[i] != '(' && str[i] != ')')
-//			throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//	tmp = 0;
-//	if (str[0] == '-' || str[0] == '+')
-//		tmp++;
-//
-//	do
-//	{
-//		tmp1 = str.find("(", tmp);
-//		if (tmp1 != tmp)
-//			throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//		tmp = ++tmp1;
-//		while (tmp < str.size() && isdigit(str[tmp]))
-//			tmp++;
-//		if (tmp == tmp1)
-//			throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//		if (tmp != -1)
-//		{
-//			tmp1 = str.find("/", tmp);
-//			if (tmp1 == -1 || (tmp1 - tmp) != 0)
-//				throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//			tmp = ++tmp1;
-//			while (tmp < str.size() && isdigit(str[tmp]))
-//				tmp++;
-//			if (tmp == tmp1)
-//				throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//			tmp1 = str.find(")", tmp);
-//			if (tmp1 == -1 || (tmp1 - tmp) != 0)
-//				throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//			tmp = ++tmp1;
-//			tmp1 = str.find("x^", tmp);
-//			if (tmp1 == -1 || (tmp1 - tmp) != 0)
-//				throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//			tmp1 += 2;
-//			while (tmp1 < str.size() && isdigit(str[tmp1]))
-//				tmp1++;
-//
-//			if (tmp == tmp1)
-//				throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//			if (tmp1 == str.size())
-//				break;
-//
-//			tmp2 = tmp = tmp1;
-//			tmp = str.find("+", tmp);
-//			tmp1 = str.find("-", tmp1);
-//			if (tmp == -1 && tmp1 == -1)
-//				throw(invalid_argument("incorrect number input. You can try help\n"));
-//
-//			if (tmp == -1)
-//				tmp = tmp1;
-//
-//			if (tmp1 != -1 && tmp1 < tmp)
-//				tmp = tmp1;
-//
-//			if ((tmp - tmp2) != 0)
-//				throw(invalid_argument("incorrect number input. You can try help\n"));
-//			tmp++;
-//		}
-//		else
-//			throw(invalid_argument("incorrect number input. You can try help\n"));
-//	} while (true);
-//
-//	MegaNatural lastCoef, b_lastCoef;
-//	int sign;
-//	MegaRational coef();
-//	bool first = true;
-//	int pos = 0;
-//
-//	do
-//	{
-//		if (first)
-//		{
-//			first = false;
-//			if (str[0] == '-')
-//				sign = -1;
-//			else
-//				sign = 1;
-//
-//			MegaInteger numerator(getNextNum(str, pos));
-//			numerator = numerator*(MegaInteger)(sign);
-//			MegaNatural denominator(getNextNum(str, pos));
-//			coefficients.push_front(MegaRational(numerator, denominator));
-//			lastCoef = getNextNum(str, pos);
-//			continue;
-//		}
-//		tmp = str.find("+", pos);
-//		tmp1 = str.find("-", pos);
-//		if (tmp == -1 && tmp1 == -1)
-//			break;
-//
-//		if (tmp != -1 && tmp1 != -1)
-//			if (tmp < tmp1)
-//				sign = 1;
-//			else
-//				sign = -1;
-//
-//		if (tmp == -1)
-//			sign = -1;
-//
-//		if (tmp1 == -1)
-//			sign = 1;
-//
-//		MegaInteger numerator(getNextNum(str, pos));
-//		numerator = numerator*(MegaInteger)(sign);
-//		MegaNatural denominator(getNextNum(str, pos));
-//
-//
-//		b_lastCoef = lastCoef;
-//		MegaRational waited = MegaRational(numerator, denominator);
-//
-//		lastCoef = getNextNum(str, pos);
-//		if (lastCoef >= b_lastCoef)
-//		{
-//			coefficients.clear();
-//			coefficients.resize(0);
-//			throw(invalid_argument("incorrect number input. You can try help\n"));
-//		}
-//		else
-//		{
-//			while ((b_lastCoef - (MegaNatural)1) > lastCoef)
-//			{
-//				b_lastCoef = b_lastCoef - (MegaNatural)1;
-//				coefficients.push_front(MegaRational());
-//			}
-//		}
-//		coefficients.push_front(waited);
-//	} while (pos < str.size());
-//	while (lastCoef >(MegaNatural)0)
-//	{
-//		lastCoef = lastCoef - (MegaNatural)1;
-//		coefficients.push_front(MegaRational());
-//
-//	}
-//}
+Polynom::Polynom(const string str)
+{
+	int i = 0;
+	while (i < str.length())
+	{
+		while (!isdigit(str[i]))
+			i++;
 
-MegaNatural getNextNum(string str, int& pos)
+		int num = 0, j = 0;
+		while (isdigit(str[i]))
+		{
+			num *= pow(10, j);
+			num += (str[i] - '0');
+			i++; j++;
+		}		
+
+		while (!isdigit(str[i]))
+			i++;
+
+		int nump = 0;
+		j = 0;
+		while (isdigit(str[i]))
+		{
+			nump *= pow(10, j);
+			nump += (str[i] - '0');
+			i++; j++;
+		}
+
+		if (nump > coefficients.size())
+			coefficients.resize(nump + 1);
+		coefficients[nump] = (MegaRational(num, 1));
+	}
+}
+
+MegaNatural Polynom::getNextNum(string str, int& pos)
 {
 	string res = "";
 
@@ -447,4 +329,12 @@ Polynom Polynom::reduce()
 MegaRational Polynom::getCoef(const long &n)
 {
 	return coefficients[n];
+}
+
+bool Polynom::isIntegerCoefs()
+{
+	for (int i = getDegree(); i >= 0; i--)
+		if (coefficients[i].getDenominator() != 1)
+			return 0;
+	return 1;
 }

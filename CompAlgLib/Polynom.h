@@ -15,6 +15,8 @@ public:
 	Polynom(const string str);
 	~Polynom();
 
+	MegaNatural getNextNum(string str, int& pos);
+
 	friend bool operator ==(const Polynom &p1, const Polynom &p2);
 	friend bool operator !=(const Polynom &p1, const Polynom &p2);
 
@@ -37,6 +39,7 @@ public:
 	MegaRational Polynom::getCoef(const long &n);
 
 	MegaRational setX(MegaRational x);
+	bool isIntegerCoefs();
 
 	string toString();
 	friend ostream& operator<<(std::ostream &os, Polynom &ob);

@@ -8,5 +8,7 @@ using namespace std;
 
 int menuChoise(char **menu, int pointCount);
 void outputFactorization(vector <pair <Polynom, long long>> multipliers);
+void message(int);
+void title();
 
 #endif
