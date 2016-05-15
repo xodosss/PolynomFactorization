@@ -11,7 +11,7 @@ int menuChoise(char **menu, int pointCount)
 		else
 			cout << endl << i + 1 << ". " << menu[i];
 
-	cout << endl << endl << "Выберите пункт: ";
+	cout << endl << endl << "Choose point: ";
 	fflush(stdin);
 	cin >> menuPoint;
 	return menuPoint;
