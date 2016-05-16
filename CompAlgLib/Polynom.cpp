@@ -21,7 +21,7 @@ Polynom::Polynom(const string str)
 			i++;
 
 		int num = 0, j = 0, sign;
-		if (str[i - 1] == '-')
+		if (i == 0 || str[i - 1] != '-')
 			sign = 1;
 		else
 			sign = -1;
