@@ -2,10 +2,9 @@
 
 vector <pair <Polynom, long long>> PolynomZ::algebraicFact()
 {
-	PolynomZ p = *this;
-	long m = floor(getDegree() / 2);
-	vector <pair <Polynom, long long>> multipliers;
-	vector <MegaInteger> x, y;
+	PolynomZ p = *this;								//полином
+	vector <pair <Polynom, long long>> multipliers;	//набор множителей 	
+	vector <MegaInteger> x, y;						
 	bool found;
 
 	if (p.reduceCoef() != MegaRational(1))
@@ -18,19 +17,22 @@ vector <pair <Polynom, long long>> PolynomZ::algebraicFact()
 	do
 	{
 		found = 0;
-		x = p.getCoef(0).toMegaInteger().dividers();
+		//нахождение делителей свободного и старшего члена p
+		x = p.getCoef(0).toMegaInteger().dividers();				
 		y = p.getCoef(p.getDegree()).toMegaInteger().dividers();
 		for (auto i = 0; i < x.size() && !found; i++)
 			for (auto j = 0; j < y.size() && !found; j++)
 			{
 				if (y[j] > 0)
 				{
+					//проверка является ли x[i]/y[j] корнем p
 					MegaRational check(x[i], y[j].toMegaNatural());
 					if (p.setX(check) == MegaRational())
 					{
 						MegaRational ma[] = { -check, MegaRational(1) };
 						Polynom tmp(ma, 2);
 						tmp = tmp * MegaRational(check.getDenominator());
+						//добавление tmp = (y[j]*x - x[i]) в multipliers
 						if (multipliers.size() > 0)
 							for (int k = multipliers.size() - 1; k >= 0; k--)
 							{
@@ -45,14 +47,13 @@ vector <pair <Polynom, long long>> PolynomZ::algebraicFact()
 						else
 							multipliers.push_back({ tmp, 1 });
 						p = p / tmp;
-						found = 1;
+						found = 1; //разложение найдено
 					}
-					else if (i == x.size() - 1 && j == y.size() - 1)
-						found = 0;
 				}
 			}
 	} while (found);
 
+	//добавление p в multipliers
 	if (p.toString() != "1")
 		if (multipliers.size() > 0)
 			for (int k = multipliers.size() - 1; k >= 0; k--)

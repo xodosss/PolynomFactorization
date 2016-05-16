@@ -17,23 +17,25 @@ Polynom::Polynom(const string str)
 	int i = 0;
 	while (i < str.length())
 	{
-		while (!isdigit(str[i]))
+		while (!isdigit(str[i]) && str[i] != 'x')
 			i++;
-
+			
 		int num = 0, j = 0, sign;
-		if (i == 0 || str[i - 1] != '-')
-			sign = 1;
+		if (str[i] == 'x')
+			num = (i == 0 || str[i - 1] != '-') ? 1 : -1;
 		else
-			sign = -1;
-		while (isdigit(str[i]))
 		{
-			num *= pow(10, j);
-			num += (str[i] - '0');
-			i++; j++;
+			sign = (i == 0 || str[i - 1] != '-') ? 1 : -1;
+			while (isdigit(str[i]))
+			{
+				num *= 10;
+				num += (str[i] - '0');
+				i++; j++;
+			}
+			num *= sign;
 		}
-		num *= sign;
 
-		while (!isdigit(str[i]))
+		while (!isdigit(str[i]) && str[i] != '\0')
 			i++;
 
 		int nump = 0;
@@ -280,7 +282,7 @@ string Polynom::toString()
 
 			if (coefficients[i].getDenominator() != 1)
 				str += '(';
-			if (coefficients[i].getNumerator() != 1 || i == 0)
+			if (coefficients[i].getNumerator() != 1 && coefficients[i].getNumerator() != -1 || i == 0)
 				str += coefficients[i].getNumerator().abs().toString();
 			if (coefficients[i].getDenominator() != 1)
 				str += '/' + coefficients[i].getDenominator().toString() + ')';

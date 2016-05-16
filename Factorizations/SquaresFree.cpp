@@ -13,10 +13,9 @@ vector <pair <Polynom, long long>> PolynomZ::squaresFreeFact()
 	}
 
 	Polynom
-		r = func::gcdP(p, p.fluxion()),
+		r = func::gcdP(p, p.fluxion()).reduce(),
 		t = p / r;
 	long long i = 1;
-
 
 	while (r.getDegree() != 0)
 	{
@@ -27,7 +26,8 @@ vector <pair <Polynom, long long>> PolynomZ::squaresFreeFact()
 		t = v;
 		i++;
 	}
+	
 	multipliers.push_back({ t.reduce(), i });
-
+	
 	return multipliers;
 }
