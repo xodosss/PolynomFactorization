@@ -34,18 +34,32 @@ Polynom::Polynom(const string str)
 			}
 			num *= sign;
 		}
-
-		while (!isdigit(str[i]) && str[i] != '\0')
-			i++;
-
+		
 		int nump = 0;
 		j = 0;
-		while (isdigit(str[i]))
+		if (str[i] == 'x')
 		{
-			nump *= pow(10, j);
-			nump += (str[i] - '0');
-			i++; j++;
+			i++;
+			if (str[i] == '^')
+			{
+				i++;
+				while (isdigit(str[i]))
+				{
+					nump *= pow(10, j);
+					nump += (str[i] - '0');
+					i++; j++;
+				}
+			}
+			else
+				nump = 1;
 		}
+		else
+			nump = 0;
+
+		while (!isdigit(str[i]) && str[i] != '\0' && str[i] != 'x')
+			i++;
+
+		
 
 		if (nump > coefficients.size())
 			coefficients.resize(nump + 1);
