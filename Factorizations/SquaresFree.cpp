@@ -5,6 +5,7 @@ vector <pair <Polynom, long long>> PolynomZ::squaresFreeFact()
 {
 	PolynomZ p = *this;
 	vector <pair <Polynom, long long>> multipliers;
+
 	if (p.reduceCoef() != MegaRational(1))
 	{
 		MegaRational mr[] = { p.reduceCoef() };
@@ -15,7 +16,8 @@ vector <pair <Polynom, long long>> PolynomZ::squaresFreeFact()
 	Polynom
 		r = func::gcdP(p, p.fluxion()).reduce(),
 		t = p / r;
-	long long i = 1;
+	long long
+		i = 1;
 
 	while (r.getDegree() != 0)
 	{
@@ -26,8 +28,22 @@ vector <pair <Polynom, long long>> PolynomZ::squaresFreeFact()
 		t = v;
 		i++;
 	}
-	
+
 	multipliers.push_back({ t.reduce(), i });
+
+	Polynom tmp = multipliers[0].first / multipliers[0].first;
 	
+	for (int i = 0; i < multipliers.size(); i++)
+	{
+		for (int j = 0; j < multipliers[i].second; j++)
+			tmp = tmp * multipliers[i].first;
+	}
+
+	if (tmp != p)
+	{
+		multipliers.clear();
+		multipliers.push_back({ p, 1 });
+	}
+
 	return multipliers;
 }

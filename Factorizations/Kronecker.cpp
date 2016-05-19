@@ -84,13 +84,19 @@ vector <pair <Polynom, long long>> PolynomZ::kroneckerFact()
 	} while (found);
 
 	if (p.toString() != "1")
-		for (int i = multipliers.size() - 1; i >= 0; i--)
-		{
-			if (multipliers[i].first == p)
-				multipliers[i].second++;
-			else if (i == 0)
-				multipliers.push_back({ p, 1 });
-		}
+		if (multipliers.size() > 0)
+			for (int k = multipliers.size() - 1; k >= 0; k--)
+			{
+				if (multipliers[k].first == p)
+				{
+					multipliers[k].second++;
+					break;
+				}
+				else if (k == 0)
+					multipliers.push_back({ p, 1 });
+			}
+		else
+			multipliers.push_back({ p, 1 });
 
 	return multipliers;
 }
