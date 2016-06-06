@@ -24,7 +24,7 @@ vector <pair <Polynom, long long>> PolynomZ::squaresFreeFact()
 		Polynom v = func::gcdP(r, t);
 		if ((t / v).getDegree() != 0)
 			multipliers.push_back({ (t / v).reduce(), i });
-		r = r / v;
+			r = r / v;
 		t = v;
 		i++;
 	}
@@ -32,7 +32,7 @@ vector <pair <Polynom, long long>> PolynomZ::squaresFreeFact()
 	multipliers.push_back({ t.reduce(), i });
 
 	Polynom tmp = multipliers[0].first / multipliers[0].first;
-	
+
 	for (int i = 0; i < multipliers.size(); i++)
 	{
 		for (int j = 0; j < multipliers[i].second; j++)

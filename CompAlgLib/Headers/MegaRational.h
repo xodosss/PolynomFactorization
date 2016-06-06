@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #ifndef MEGA_RATIONAL
 #define MEGA_RATIONAL
 
@@ -14,7 +15,7 @@ public:
 	MegaRational(const MegaRational &a);
 	MegaRational(string);
 	~MegaRational();
-	
+
 	void reduction();
 	bool isInteger();
 	MegaInteger toMegaInteger();

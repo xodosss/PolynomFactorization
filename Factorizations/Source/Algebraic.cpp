@@ -4,7 +4,7 @@ vector <pair <Polynom, long long>> PolynomZ::algebraicFact()
 {
 	PolynomZ p = *this;								//полином
 	vector <pair <Polynom, long long>> multipliers;	//набор множителей 	
-	vector <MegaInteger> x, y;						
+	vector <MegaInteger> x, y;
 	bool found;
 
 	if (p.reduceCoef() != MegaRational(1))
@@ -18,7 +18,7 @@ vector <pair <Polynom, long long>> PolynomZ::algebraicFact()
 	{
 		found = 0;
 		//нахождение делителей свободного и старшего члена p
-		x = p.getCoef(0).toMegaInteger().dividers();				
+		x = p.getCoef(0).toMegaInteger().dividers();
 		y = p.getCoef(p.getDegree()).toMegaInteger().dividers();
 		for (auto i = 0; i < x.size() && !found; i++)
 			for (auto j = 0; j < y.size() && !found; j++)

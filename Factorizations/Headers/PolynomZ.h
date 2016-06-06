@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #ifndef POLYNOM_Z
 #define POLYNOM_Z
 
@@ -8,6 +7,7 @@
 class PolynomZ : public Polynom
 {
 public:
+	PolynomZ();
 	PolynomZ(const Polynom &ob);
 	~PolynomZ();
 

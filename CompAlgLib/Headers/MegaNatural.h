@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #ifndef MEGA_NATURAL
 #define MEGA_NATURAL
 

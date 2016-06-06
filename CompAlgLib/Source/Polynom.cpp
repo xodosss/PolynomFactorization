@@ -15,11 +15,28 @@ Polynom::Polynom(const Polynom &ob)
 Polynom::Polynom(const string str)
 {
 	int i = 0;
+	
+	for (i = 0; i < str.length(); i++)
+		if (!isdigit(str[i]) && str[i] != '^' && str[i] != '+' && str[i] != '-' && str[i] != ' ' && str[i] != 'x')
+		{
+			coefficients.push_back(MegaRational());
+			return;
+		}
+
+	i = 0;
 	while (i < str.length())
 	{
 		while (!isdigit(str[i]) && str[i] != 'x')
+		{
+			if (str[i] == '^')
+			{
+				coefficients.clear();
+				coefficients.push_back(MegaRational());
+				return;
+			}
 			i++;
-			
+		}
+
 		int num = 0, j = 0, sign;
 		if (str[i] == 'x')
 			num = (i == 0 || str[i - 1] != '-') ? 1 : -1;
@@ -43,6 +60,12 @@ Polynom::Polynom(const string str)
 			if (str[i] == '^')
 			{
 				i++;
+				if (!isdigit(str[i]))
+				{
+					coefficients.clear();
+					coefficients.push_back(MegaRational());
+					return;
+				}
 				while (isdigit(str[i]))
 				{
 					nump *= pow(10, j);
@@ -57,12 +80,24 @@ Polynom::Polynom(const string str)
 			nump = 0;
 
 		while (!isdigit(str[i]) && str[i] != '\0' && str[i] != 'x')
+		{
+			if (str[i] == '^')
+			{
+				coefficients.clear();
+				coefficients.push_back(MegaRational());
+				return;
+			}
 			i++;
+		}
 
-		
-
-		if (nump > coefficients.size())
+		if (nump >= coefficients.size())
 			coefficients.resize(nump + 1);
+		else if (coefficients[nump] != MegaRational())
+		{
+			coefficients.clear();
+			coefficients.push_back(MegaRational());
+			return;
+		}
 		coefficients[nump] = (MegaRational(num, 1));
 	}
 }
@@ -290,9 +325,9 @@ string Polynom::toString()
 		if (coefficients[i] != MegaRational())
 		{
 			if (coefficients[i].getNumerator() < 0)
-				str += "-";
+				str += " - ";
 			else if (i != getDegree())
-				str += "+";
+				str += " + ";
 
 			if (coefficients[i].getDenominator() != 1)
 				str += '(';
